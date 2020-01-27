@@ -1,20 +1,26 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import htmlToElement from './htmlToElement';
-import {Linking, Platform, StyleSheet, View, ViewPropTypes} from 'react-native';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import htmlToElement from "./htmlToElement";
+import {
+  Linking,
+  Platform,
+  StyleSheet,
+  View,
+  ViewPropTypes
+} from "react-native";
 
-const boldStyle = {fontWeight: '500'};
-const italicStyle = {fontStyle: 'italic'};
-const underlineStyle = {textDecorationLine: 'underline'};
-const strikethroughStyle = {textDecorationLine: 'line-through'};
-const codeStyle = {fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace'};
+const boldStyle = { fontWeight: "500" };
+const italicStyle = { fontStyle: "italic" };
+const underlineStyle = { textDecorationLine: "underline" };
+const strikethroughStyle = { textDecorationLine: "line-through" };
+const codeStyle = { fontFamily: Platform.OS === "ios" ? "Menlo" : "monospace" };
 
 const baseStyles = StyleSheet.create({
   b: boldStyle,
   strong: {
-    fontSize:26,
-    fontWeight:'500',
-    color:'black',
+    fontSize: 26,
+    fontWeight: "500",
+    color: "black"
   },
   i: italicStyle,
   em: italicStyle,
@@ -36,8 +42,9 @@ const baseStyles = StyleSheet.create({
   h4: { fontWeight: "500", fontSize: 18 },
   h5: { fontWeight: "500", fontSize: 14 },
   h6: { fontWeight: "500", fontSize: 12 },
-  strong:{fontWeight:'400'},
-  figcaption:{fontWeight:'400', fontSize:16, color:'grey'},
+  strong: { fontWeight: "400" },
+  figcaption: { fontWeight: "400", fontSize: 16, color: "grey" },
+  div: { fontWeight: "400", fontSize: 20, lineHeight: 25, color: "#333" },
   // span:{fontWeight:'400',color:'red', fontStyle:'italic'},
   blockquote: { fontSize: 20, fontWeight: "400", color: "red" },
   em: { fontSize: 20, fontWeight: "400", color: "red" },
@@ -46,20 +53,20 @@ const baseStyles = StyleSheet.create({
 });
 
 const htmlToElementOptKeys = [
-  'lineBreak',
-  'paragraphBreak',
-  'bullet',
-  'TextComponent',
-  'textComponentProps',
-  'NodeComponent',
-  'nodeComponentProps',
+  "lineBreak",
+  "paragraphBreak",
+  "bullet",
+  "TextComponent",
+  "textComponentProps",
+  "NodeComponent",
+  "nodeComponentProps"
 ];
 
 class HtmlView extends PureComponent {
   constructor() {
     super();
     this.state = {
-      element: null,
+      element: null
     };
   }
 
@@ -69,8 +76,18 @@ class HtmlView extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.value !== prevProps.value || this.props.stylesheet !== prevProps.stylesheet || this.props.textComponentProps !== prevProps.textComponentProps || this.props.nodeComponentProps !== prevProps.nodeComponentProps) {
-      this.startHtmlRender(this.props.value, this.props.stylesheet, this.props.textComponentProps, this.props.nodeComponentProps);
+    if (
+      this.props.value !== prevProps.value ||
+      this.props.stylesheet !== prevProps.stylesheet ||
+      this.props.textComponentProps !== prevProps.textComponentProps ||
+      this.props.nodeComponentProps !== prevProps.nodeComponentProps
+    ) {
+      this.startHtmlRender(
+        this.props.value,
+        this.props.stylesheet,
+        this.props.textComponentProps,
+        this.props.nodeComponentProps
+      );
     }
   }
 
@@ -85,23 +102,23 @@ class HtmlView extends PureComponent {
       onLinkLongPress,
       stylesheet,
       renderNode,
-      onError,
+      onError
     } = this.props;
 
     if (!value) {
-      this.setState({element: null});
+      this.setState({ element: null });
     }
 
     const opts = {
       addLineBreaks,
       linkHandler: onLinkPress,
       linkLongPressHandler: onLinkLongPress,
-      styles: {...baseStyles, ...stylesheet, ...style},
-      customRenderer: renderNode,
+      styles: { ...baseStyles, ...stylesheet, ...style },
+      customRenderer: renderNode
     };
 
     htmlToElementOptKeys.forEach(key => {
-      if (typeof this.props[key] !== 'undefined') {
+      if (typeof this.props[key] !== "undefined") {
         opts[key] = this.props[key];
       }
     });
@@ -120,19 +137,19 @@ class HtmlView extends PureComponent {
       }
 
       if (this.mounted) {
-        this.setState({element});
+        this.setState({ element });
       }
     });
   }
 
   render() {
-    const {RootComponent, style} = this.props;
-    const {element} = this.state;
+    const { RootComponent, style } = this.props;
+    const { element } = this.state;
     if (element) {
       return (
         <RootComponent
           {...this.props.rootComponentProps}
-          style={{...style, ...{paddingHorizontal: 11,}}}
+          style={{ ...style, ...{ paddingHorizontal: 11 } }}
         >
           {element}
         </RootComponent>
@@ -141,7 +158,7 @@ class HtmlView extends PureComponent {
     return (
       <RootComponent
         {...this.props.rootComponentProps}
-        style={{...style, ...{paddingHorizontal: 11,}}}
+        style={{ ...style, ...{ paddingHorizontal: 11 } }}
       />
     );
   }
@@ -164,7 +181,7 @@ HtmlView.propTypes = {
   stylesheet: PropTypes.object,
   TextComponent: PropTypes.func,
   textComponentProps: PropTypes.object,
-  value: PropTypes.string,
+  value: PropTypes.string
 };
 
 HtmlView.defaultProps = {
@@ -172,7 +189,7 @@ HtmlView.defaultProps = {
   onLinkPress: url => Linking.openURL(url),
   onLinkLongPress: null,
   onError: console.error.bind(console),
-  RootComponent: element => <View {...element} />, // eslint-disable-line react/display-name
+  RootComponent: element => <View {...element} /> // eslint-disable-line react/display-name
 };
 
 export default HtmlView;

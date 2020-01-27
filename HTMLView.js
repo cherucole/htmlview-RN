@@ -24,23 +24,25 @@ const baseStyles = StyleSheet.create({
   pre: codeStyle,
   code: codeStyle,
   a: {
-    fontSize:0.1,
-    opacity:0,
-    fontWeight: '100',
-    color: 'blue', //used white to hide anchor tags from wordpress
+    fontSize: 21,
+    // opacity:0,
+    fontWeight: "200",
+    color: "blue" //used white to hide anchor tags from wordpress
   },
-  p:{fontWeight: '400', fontSize: 20, lineHeight:25, color:'#333'},
-  h1: {fontWeight: '500', fontSize: 36},
-  h2: {fontWeight: '500', fontSize: 30},
-  h3: {fontWeight: '400', fontSize: 20},
-  h4: {fontWeight: '500', fontSize: 18},
-  h5: {fontWeight: '500', fontSize: 14},
-  h6: {fontWeight: '500', fontSize: 12},
-  span:{fontWeight:'400',color:'red', fontStyle:'italic'},
-  blockquote:{fontSize: 20,fontWeight:'400',color:'red', fontStyle:'italic'},
-  em:{fontSize: 20,fontWeight:'400',color:'red', fontStyle:'italic'},
-  ol:{fontSize:26, fontWeight:'500',color:'black',},
-  // li:{fontSize:26, fontWeight:'500',color:'black',},
+  p: { fontWeight: "400", fontSize: 20, lineHeight: 25, color: "#333" },
+  h1: { fontWeight: "500", fontSize: 36 },
+  h2: { fontWeight: "500", fontSize: 30 },
+  h3: { fontWeight: "400", fontSize: 20 },
+  h4: { fontWeight: "500", fontSize: 18 },
+  h5: { fontWeight: "500", fontSize: 14 },
+  h6: { fontWeight: "500", fontSize: 12 },
+  strong:{fontWeight:'400'},
+  figcaption:{fontWeight:'400', fontSize:16, color:'grey'},
+  // span:{fontWeight:'400',color:'red', fontStyle:'italic'},
+  blockquote: { fontSize: 20, fontWeight: "400", color: "red" },
+  em: { fontSize: 20, fontWeight: "400", color: "red" },
+  ol: { fontSize: 26, fontWeight: "500", color: "black" },
+  li: { fontSize: 18, fontWeight: "400", color: "black" }
 });
 
 const htmlToElementOptKeys = [

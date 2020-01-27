@@ -39,7 +39,7 @@ export default class AutoSizedImage extends PureComponent {
   render() {
     const finalSize = {};
     if (this.state.width > width) {
-      finalSize.width = width*0.9;
+      finalSize.width = width*0.94;
       const ratio = width / this.state.width;
       finalSize.height = this.state.height * ratio;
     }
@@ -56,7 +56,7 @@ export default class AutoSizedImage extends PureComponent {
       source = Object.assign(source, this.props.source, finalSize);
     }
 
-    return <View style={{paddingLeft:'2.5%',shadowColor: "black",
+    return <View style={{shadowColor: "black",
     shadowOffset: {
       height: 2,
       width: 0
